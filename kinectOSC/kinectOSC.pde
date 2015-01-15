@@ -265,32 +265,32 @@ void sendSkeleton(int userId)
   leftKnee = kinectToWorldNormalised( leftKnee );
   leftFoot = kinectToWorldNormalised( leftFoot );
   
-  JSONObject skeleton = new JSONObject();
+  JSONObject skeletonWorld = new JSONObject();
   float[] normalisedBounds = kinectUserBoundstoWorldNormalised( bounds );
-  skeleton.setJSONArray( "bounds", floatArrayToJSONArray( normalisedBounds ) );
-  skeleton.setJSONObject( "head", PVectorToJSONObject( head ) );
-  skeleton.setJSONObject( "neck", PVectorToJSONObject( neck ) );
-  skeleton.setJSONObject( "rightShoulder", PVectorToJSONObject( rightShoulder ) );
-  skeleton.setJSONObject( "rightElbow", PVectorToJSONObject( rightElbow ) );
-  skeleton.setJSONObject( "rightHand", PVectorToJSONObject( rightHand ) );
-  skeleton.setJSONObject( "leftShoulder", PVectorToJSONObject( leftShoulder ) );
-  skeleton.setJSONObject( "leftElbow", PVectorToJSONObject( leftElbow ) );
-  skeleton.setJSONObject( "leftHand", PVectorToJSONObject( leftHand ) );
-  skeleton.setJSONObject( "torso", PVectorToJSONObject( torso ) );
-  skeleton.setJSONObject( "rightHip", PVectorToJSONObject( rightHip ) );
-  skeleton.setJSONObject( "rightKnee", PVectorToJSONObject( rightKnee ) );
-  skeleton.setJSONObject( "rightFoot", PVectorToJSONObject( rightFoot ) );
-  skeleton.setJSONObject( "leftHip", PVectorToJSONObject( leftHip ) );
-  skeleton.setJSONObject( "leftKnee", PVectorToJSONObject( leftKnee ) );
-  skeleton.setJSONObject( "leftFoot", PVectorToJSONObject( leftFoot ) );
+  skeletonWorld.setJSONArray( "bounds", floatArrayToJSONArray( normalisedBounds ) );
+  skeletonWorld.setJSONObject( "head", PVectorToJSONObject( head ) );
+  skeletonWorld.setJSONObject( "neck", PVectorToJSONObject( neck ) );
+  skeletonWorld.setJSONObject( "rightShoulder", PVectorToJSONObject( rightShoulder ) );
+  skeletonWorld.setJSONObject( "rightElbow", PVectorToJSONObject( rightElbow ) );
+  skeletonWorld.setJSONObject( "rightHand", PVectorToJSONObject( rightHand ) );
+  skeletonWorld.setJSONObject( "leftShoulder", PVectorToJSONObject( leftShoulder ) );
+  skeletonWorld.setJSONObject( "leftElbow", PVectorToJSONObject( leftElbow ) );
+  skeletonWorld.setJSONObject( "leftHand", PVectorToJSONObject( leftHand ) );
+  skeletonWorld.setJSONObject( "torso", PVectorToJSONObject( torso ) );
+  skeletonWorld.setJSONObject( "rightHip", PVectorToJSONObject( rightHip ) );
+  skeletonWorld.setJSONObject( "rightKnee", PVectorToJSONObject( rightKnee ) );
+  skeletonWorld.setJSONObject( "rightFoot", PVectorToJSONObject( rightFoot ) );
+  skeletonWorld.setJSONObject( "leftHip", PVectorToJSONObject( leftHip ) );
+  skeletonWorld.setJSONObject( "leftKnee", PVectorToJSONObject( leftKnee ) );
+  skeletonWorld.setJSONObject( "leftFoot", PVectorToJSONObject( leftFoot ) );
   
+  JSONObject skeleton = new JSONObject();
+  skeleton.setJSONObject( "world", skeletonWorld );
+  skeleton.setJSONObject( "normalised", skeletonNorm );
+
   OscMessage msg = new OscMessage( "/user/" + userId + "/skeleton" );
   msg.add( skeleton.toString() );
   oscP5.send( msg, netAddress ); 
-  
-  OscMessage msgNorm = new OscMessage( "/user/" + userId + "/normalised" );
-  msgNorm.add( skeletonNorm.toString() );
-  oscP5.send( msgNorm, netAddress );
 
 }
 
